@@ -11,8 +11,8 @@ module.exports = {
         try {
 
             const results = await knex('players')
-                .select('username', 'score')
-                .orderBy('score', 'desc')
+                .select('nickname', 'maxScore')
+                .orderBy('maxScore', 'desc')
                 .limit(5)
                 return res.json(results)
 
