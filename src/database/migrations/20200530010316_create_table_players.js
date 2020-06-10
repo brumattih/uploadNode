@@ -6,7 +6,7 @@ exports.up = function(knex) {
         table.text('email').unique().notNullable()
         table.text('password').notNullable()
         table.integer('maxScore').nullable()
-        table.integer('minScore').nullable()
+        table.integer('score').nullable()
         table.integer('nOfMatches').nullable()
         table.timestamp('created_at').defaultTo(knex.fn.now())
         table.timestamp('updated_at').defaultTo(knex.fn.now())

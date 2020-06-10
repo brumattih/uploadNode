@@ -14,7 +14,7 @@ module.exports = {
                 .select('nickname', 'maxScore')
                 .orderBy('maxScore', 'desc')
                 .limit(5)
-                return res.json(results)
+            return res.json(results)
 
         }
         catch (error) {
@@ -64,7 +64,21 @@ module.exports = {
             next(error)
         }
     },
-    async updateScore(req, res, next) {
+    async getScore(req, res, next) {
+        try {
+            const { nickname } = req.body
+
+            const results = await knex('players')
+                .select('nickname', 'score', 'maxScore').where({ nickname })
+            return res.json(results)
+
+        }
+        catch (error) {
+            next(error)
+        }
+
+    },
+    async updateMaxScore(req, res, next) {
         try {
             const { nickname, maxScore } = req.body
             await knex('players')
@@ -76,6 +90,20 @@ module.exports = {
             next(error)
         }
     },
+
+    async updateScore(req, res, next) {
+        try {
+            const { nickname, score } = req.body
+            await knex('players')
+                .update({ score }).where({
+                    nickname
+                })
+            return res.status(201).send()
+        } catch (error) {
+            next(error)
+        }
+    },
+
     async ValidaEmail(req, res, next) {
         try {
             const { email } = req.body
