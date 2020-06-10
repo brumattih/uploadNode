@@ -66,9 +66,9 @@ module.exports = {
     },
     async updateScore(req, res, next) {
         try {
-            const { nickname, score } = req.body
+            const { nickname, maxScore } = req.body
             await knex('players')
-                .update({ score }).where({
+                .update({ maxScore }).where({
                     nickname
                 })
             return res.status(201).send()
