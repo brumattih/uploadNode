@@ -7,6 +7,22 @@ module.exports = {
         return res.json(results)
     },
 
+    async getRanking(req, res, next) {
+        try {
+
+            const results = await knex('players')
+                .select('username', 'score')
+                .orderBy('score', 'desc')
+                .limit(5)
+                return res.json(results)
+
+        }
+        catch (error) {
+            next(error)
+        }
+
+    },
+
     async logon(req, res, next) {
         try {
             const { email, password } = req.body
