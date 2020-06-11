@@ -3,7 +3,7 @@ const knex = require('../database')
 module.exports = {
     async index(req, res) {
         console.log(process.env.DATABASE_URL)
-        const results = await knex('players')
+        const results = await knex('players').orderBy('id')
         return res.json(results)
     },
 
