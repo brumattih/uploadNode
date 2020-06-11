@@ -64,6 +64,14 @@ module.exports = {
             next(error)
         }
     },
+
+    async getUserbyId(req, res, next) {
+        const user = await knex('players').where({id:req.params.id})
+
+        return res.json(user)
+
+    },
+
     async getScore(req, res, next) {
         try {
             const { nickname } = req.body
