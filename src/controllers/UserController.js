@@ -79,9 +79,10 @@ module.exports = {
             user.nickname = undefined;
             user.email = undefined;
             user.password = undefined;
-            const updated = await knex('players')
+            knex('players')
                 .where({ id: req.params.id })
                 .update(user)
+                .returning('*')
             return res.json(updated)
         } catch (e) {
             next(e)
