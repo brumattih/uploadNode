@@ -83,7 +83,7 @@ module.exports = {
                 .where({ id: req.params.id })
                 .update(user)
                 .returning('*')
-            return res.json(updated)
+            return res.json(updated[0])
         } catch (e) {
             next(e)
         }
