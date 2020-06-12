@@ -66,10 +66,40 @@ module.exports = {
     },
 
     async getUserbyId(req, res, next) {
-        const user = await knex('players').where({id:req.params.id})
+        const user = await knex('players').where({ id: req.params.id })
 
         return res.json(user)
 
+    },
+
+    async update(req, res, next) {
+        try {
+            const user = req.body;
+            user.id = undefined;
+            user.nickname = undefined;
+            user.email = undefined;
+            user.password = undefined;
+            const updated = await knex('players')
+                .where({ id: req.params.id })
+                .update(user)
+            return res.json(updated)
+        } catch (e) {
+            next(e)
+        }
+
+    },
+
+    async updateUserScore(req, res, next) {
+        try {
+            const { id, score, maxScore } = req.body
+            await knex('players')
+                .update({ score, maxScore }).where({
+                    id
+                })
+            return res.status(201).send()
+        } catch (error) {
+            next(error)
+        }
     },
 
     async getScore(req, res, next) {

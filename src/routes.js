@@ -9,8 +9,7 @@ routes.get('/ranking', UserController.getRanking)
 routes.post('/questions', UserController.questions)
 routes.post('/players', UserController.createPlayer)
 routes.post('/logon', UserController.logon)
-routes.put('/score', UserController.updateScore)
-routes.put('/maxScore', UserController.updateMaxScore)
+routes.put('/players/:id', UserController.update)
 routes.put('/updateSenha', UserController.updateSenha)
 
 module.exports = routes
