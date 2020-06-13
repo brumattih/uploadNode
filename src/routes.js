@@ -10,6 +10,6 @@ routes.post('/questions', UserController.questions)
 routes.post('/players', UserController.createPlayer)
 routes.post('/logon', UserController.logon)
 routes.put('/players/:id', UserController.update)
-routes.put('/updateSenha', UserController.updateSenha)
+routes.put('/updatepassword/:id', UserController.updatePassword)
 
 module.exports = routes
