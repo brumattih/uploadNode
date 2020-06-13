@@ -74,11 +74,11 @@ module.exports = {
 
     async update(req, res, next) {
         try {
-            const user = req.body;
-            user.id = undefined;
-            user.nickname = undefined;
-            user.email = undefined;
-            user.password = undefined;
+            const user = req.body
+            user.id = undefined
+            user.nickname = undefined
+            user.email = undefined
+            user.password = undefined
             const updated = await knex('players')
                 .where({ id: req.params.id })
                 .update(user)
@@ -92,13 +92,16 @@ module.exports = {
 
     async updatePassword(req, res, next) {
         try {
-            const user = req.body;
-            user.id = undefined;
-            user.nickname = undefined;
-            user.email = undefined;
+            const user = req.body
+            user.id = undefined
+            user.nickname = undefined
+            user.email = undefined
+            user.score = undefined
+            user.maxScore = undefined
+            user.nOfMatches = undefined
             const updated = await knex('players')
                 .where({ id: req.params.id })
-                .update(password)
+                .update(user)
                 .returning('id, email, password')
             return res.json(updated[0])
         } catch (e) {
