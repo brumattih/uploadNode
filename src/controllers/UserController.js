@@ -74,11 +74,11 @@ module.exports = {
 
     async update(req, res, next) {
         try {
-            const user = req.body
-            user.id = undefined
-            user.nickname = undefined
-            user.email = undefined
-            user.password = undefined
+            const user = req.body;
+            user.id = undefined;
+            user.nickname = undefined;
+            user.email = undefined;
+            user.password = undefined;
             const updated = await knex('players')
                 .where({ id: req.params.id })
                 .update(user)
@@ -90,28 +90,19 @@ module.exports = {
 
     },
 
-    async updatePassword(req, res, next) {
+    async updateUserScore(req, res, next) {
         try {
-            const user = req.body
-            user.id = undefined
-            user.nickname = undefined
-            user.email = undefined
-            user.score = undefined
-            user.maxScore = undefined
-            user.nOfMatches = undefined
-            const updated = await knex('players')
-                .where({ id: req.params.nickname })
-                .update(user)
-                .returning('*')
-            return res.json(updated[0])
-        } catch (e) {
-            next(e)
+            const { id, score, maxScore } = req.body
+            await knex('players')
+                .update({ score, maxScore }).where({
+                    id
+                })
+            return res.status(201).send()
+        } catch (error) {
+            next(error)
         }
-
     },
 
-
-  
     async getScore(req, res, next) {
         try {
             const { nickname } = req.body
