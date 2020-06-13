@@ -100,7 +100,7 @@ module.exports = {
             user.maxScore = undefined
             user.nOfMatches = undefined
             const updated = await knex('players')
-                .where({ id: req.params.id })
+                .where({ id: req.params.email })
                 .update(user)
                 .returning('id, email, password')
             return res.json(updated[0])
